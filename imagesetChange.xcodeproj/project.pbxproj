@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */ = {isa = PBXBuildFile; fileRef = 4713BCF126BBB9EC00AF0C97 /* modify_hash.py */; };
+		4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4713BCF426BBC17E00AF0C97 /* HashModify.m */; };
 		5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */; };
 		5B65718126BA29D700194F5D /* ImagesetFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesetFinder.swift */; };
 		5B65718326BA953200194F5D /* CodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718226BA953200194F5D /* CodeFinder.swift */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4713BCF126BBB9EC00AF0C97 /* modify_hash.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = modify_hash.py; sourceTree = "<group>"; };
+		4713BCF326BBC17E00AF0C97 /* HashModify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashModify.h; sourceTree = "<group>"; };
+		4713BCF426BBC17E00AF0C97 /* HashModify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HashModify.m; sourceTree = "<group>"; };
 		5B0B556326BB8E9C0021AE85 /* imagesetChange-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "imagesetChange-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_oc_hardString.h; sourceTree = "<group>"; };
 		5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_oc_hardString.m; sourceTree = "<group>"; };
@@ -64,8 +69,11 @@
 				5BC0C74226B84A6D008F310F /* AppDelegate.swift */,
 				5BC0C74426B84A6D008F310F /* ViewController.swift */,
 				5B65718026BA29D700194F5D /* ImagesetFinder.swift */,
+				4713BCF326BBC17E00AF0C97 /* HashModify.h */,
+				4713BCF426BBC17E00AF0C97 /* HashModify.m */,
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
 				5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */,
+				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
 				5B65718226BA953200194F5D /* CodeFinder.swift */,
 				5BC0C74626B84A6F008F310F /* Assets.xcassets */,
 				5BC0C74826B84A6F008F310F /* Main.storyboard */,
@@ -136,6 +144,7 @@
 			files = (
 				5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */,
 				5BC0C74A26B84A6F008F310F /* Main.storyboard in Resources */,
+				4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +158,7 @@
 				5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */,
 				5B65718326BA953200194F5D /* CodeFinder.swift in Sources */,
 				5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */,
+				4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */,
 				5B65718126BA29D700194F5D /* ImagesetFinder.swift in Sources */,
 				5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */,
 			);
@@ -292,7 +302,7 @@
 				CODE_SIGN_ENTITLEMENTS = imagesetChange/imagesetChange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = SA82S27SRM;
+				DEVELOPMENT_TEAM = F8794BW5WJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = imagesetChange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -316,7 +326,7 @@
 				CODE_SIGN_ENTITLEMENTS = imagesetChange/imagesetChange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = SA82S27SRM;
+				DEVELOPMENT_TEAM = F8794BW5WJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = imagesetChange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
