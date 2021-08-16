@@ -20,7 +20,8 @@ class ImagesetFinder {
         let absURL: URL
     }
     
-    private var imgsMap = [String : ImgItem]()
+    /// imageset Name : item
+    private(set) var imgsMap = [String : ImgItem]()
     init() {}
     
     
