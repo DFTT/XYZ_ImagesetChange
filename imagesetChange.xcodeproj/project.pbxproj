@@ -71,16 +71,13 @@
 				5BC0C74226B84A6D008F310F /* AppDelegate.swift */,
 				5BC0C74426B84A6D008F310F /* ViewController.swift */,
 				5B65718026BA29D700194F5D /* ImagesetFinder.swift */,
-
+				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
+				5B65718226BA953200194F5D /* CodeFinder.swift */,
+				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
 				4713BCF326BBC17E00AF0C97 /* HashModify.h */,
 				4713BCF426BBC17E00AF0C97 /* HashModify.m */,
-
-				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
-
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
 				5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */,
-				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
-				5B65718226BA953200194F5D /* CodeFinder.swift */,
 				5BC0C74626B84A6F008F310F /* Assets.xcassets */,
 				5BC0C74826B84A6F008F310F /* Main.storyboard */,
 				5BC0C74B26B84A6F008F310F /* Info.plist */,
@@ -309,7 +306,7 @@
 				CODE_SIGN_ENTITLEMENTS = imagesetChange/imagesetChange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = F8794BW5WJ;
+				DEVELOPMENT_TEAM = SA82S27SRM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = imagesetChange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

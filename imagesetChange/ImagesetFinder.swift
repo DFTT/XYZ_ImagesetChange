@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ImagesetFinder.ImgItem: Hashable {
+extension ImagesetFinder.ImgsetItem: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(absURL)
@@ -15,13 +15,13 @@ extension ImagesetFinder.ImgItem: Hashable {
 }
 
 class ImagesetFinder {
-    struct ImgItem {
+    struct ImgsetItem {
         let name: String
         let absURL: URL
     }
     
     /// imageset Name : item
-    private(set) var imgsMap = [String : ImgItem]()
+    private(set) var imgsMap = [String : ImgsetItem]()
     init() {}
     
     
@@ -63,7 +63,7 @@ class ImagesetFinder {
 extension ImagesetFinder {
     
     /// 根据已经扫描出来的imageset路径 逐个修改对应的fileName (不会修改 imageset Name 代码取图不受影响)
-    /// - Parameter block: 回传原filename 请按照需要的规则修改后 返回新的fileName
+    /// - Parameter block: 回传原imagesetName 请按照需要的规则修改后 返回新的fileName
     func reNameAllImageFile(_ block: (String) -> String) {
         guard !imgsMap.isEmpty else {
             print("请先 调用查找")
@@ -74,7 +74,7 @@ extension ImagesetFinder {
            p__changeSetFileName(setitem, nameBlock: block)
         }
     }
-    private func p__changeSetFileName(_ setitem: ImgItem, nameBlock: (String) -> String) {
+    private func p__changeSetFileName(_ setitem: ImgsetItem, nameBlock: (String) -> String) {
         let fileMgr = FileManager.default
 
         let jsonPath = setitem.absURL.appendingPathComponent("Contents.json")
@@ -89,7 +89,7 @@ extension ImagesetFinder {
     
         let newName = nameBlock(setitem.name)
         let dicURL = setitem.absURL
-        var flag = false
+        var flag = false // 是否需要回写aset.config
         let newImgs = imgs.map { item -> [String: Any] in
             guard let filename = item["filename"] as? String,
                   let scale = item["scale"] as? String
@@ -97,7 +97,7 @@ extension ImagesetFinder {
                 // 不修改
                 return item
             }
-        
+            
             let newFileName = "\(newName)@\(scale)" + "." + (filename as NSString).pathExtension
         
             let oldURL = dicURL.appendingPathComponent(filename)
@@ -107,7 +107,7 @@ extension ImagesetFinder {
                 // 改名失败 不修改
                 return item
             }
-            // 改名成功
+            // 改名成功 同步到配置中
             flag = true
             var newItem = item
             newItem["filename"] = newFileName
@@ -150,7 +150,7 @@ extension ImagesetFinder {
         func _save(path: URL) {
             let lastCom = path.lastPathComponent
             
-            let item = ImgItem(name: String(lastCom.prefix(lastCom.count - path.pathExtension.count - 1)),
+            let item = ImgsetItem(name: String(lastCom.prefix(lastCom.count - path.pathExtension.count - 1)),
                                absURL: path)
             guard nil == imgsMap[item.name] else {
                 print("Error: 发现重名的.imageset -> \(lastCom)")
@@ -217,7 +217,7 @@ extension ImagesetFinder {
         try? FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
         return true
     }
-    private func p__moveImgFile(_ setitem: ImgItem, dirURL: URL, goback: Bool) {
+    private func p__moveImgFile(_ setitem: ImgsetItem, dirURL: URL, goback: Bool) {
         let fileMgr = FileManager.default
 
         let jsonPath = setitem.absURL.appendingPathComponent("Contents.json")

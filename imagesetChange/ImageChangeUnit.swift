@@ -19,7 +19,7 @@ class ImageChangeUnit  {
     }()
     
     //
-    static func maskImage(_ item: ImagesetFinder.ImgItem) {
+    static func maskImage(_ item: ImagesetFinder.ImgsetItem) {
         func __changeImage(_ url: URL) {
             guard let imgData = try? Data(contentsOf: url) else{
                 print("无效的图片: \(url)")

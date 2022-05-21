@@ -34,7 +34,7 @@ class ViewController: NSViewController {
         
         
         // 功能
-        // 修改 .imageset 中的文件名
+        // 修改 .imageset 中的文件名 (是文件名和imageset名统一)
         imageer.reNameAllImageFile { oldName in
             // 混淆生成新名字
             return "xxxxx_" + oldName
