@@ -12,7 +12,7 @@ import Foundation
 class ImageChangeUnit {
     private static var maskCICtx: (ctx: CIContext, maskImage: CIImage) = {
         let ctx = CIContext()
-        let ciimg = CIImage(color: CIColor(red: 0, green: 0, blue: 0, alpha: 0.05))
+        let ciimg = CIImage(color: CIColor(red: 0, green: 0, blue: 0, alpha: 0.03)) // 默认 0.03
         return (ctx, ciimg)
     }()
 
@@ -66,23 +66,29 @@ class ImageChangeUnit {
         } else if fistbyte == 0x89 {
             type = 2 // png
         } else {
-            print("仅支持png/jpg图片: \(url)")
+//            print("请检查格式, 仅支持png/jpg图片: \(url)")
             return
         }
         guard let img = CIImage(data: imgData) else {
             print("无效的图片: \(url)")
             return
         }
-        let mask = maskCICtx.maskImage.cropped(to: img.extent)
-        let new = mask.composited(over: img)
+
+        // 遮罩层 处理size等于img
+        let cropedMask = maskCICtx.maskImage.cropped(to: img.extent)
+        // 遮罩层 处理有色区域等于img, 避免下一步覆盖后, img无色区域被混合上色
+        let shapeMask = CIFilter(name: "CISourceInCompositing",
+                                 parameters: [kCIInputImageKey: cropedMask, kCIInputBackgroundImageKey: img])!.outputImage!
+        // 遮盖混合
+        let mixed = shapeMask.composited(over: img)
 
         if type == 1 {
-            guard (try? maskCICtx.ctx.writeJPEGRepresentation(of: new, to: url, colorSpace: CGColorSpaceCreateDeviceRGB(), options: [:])) != nil else {
+            guard (try? maskCICtx.ctx.writeJPEGRepresentation(of: mixed, to: url, colorSpace: CGColorSpaceCreateDeviceRGB(), options: [:])) != nil else {
                 print("滤镜处理图片回写失败: \(url)")
                 return
             }
         } else {
-            guard (try? maskCICtx.ctx.writePNGRepresentation(of: new, to: url, format: CIFormat.ARGB8, colorSpace: CGColorSpaceCreateDeviceRGB(), options: [:])) != nil else {
+            guard (try? maskCICtx.ctx.writePNGRepresentation(of: mixed, to: url, format: CIFormat.ARGB8, colorSpace: CGColorSpaceCreateDeviceRGB(), options: [:])) != nil else {
                 print("滤镜处理图片回写失败: \(url)")
                 return
             }
