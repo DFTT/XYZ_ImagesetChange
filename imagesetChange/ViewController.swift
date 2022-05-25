@@ -16,7 +16,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let imageer = ImagesetFinder()
+        let imageer = ImagesFinder()
         // 搜索全部 .imageset
         imageer.startScanFrom(rootPath: projectRootDir)
 
@@ -24,6 +24,7 @@ class ViewController: NSViewController {
         // 搜索全部硬编码字符串
         coder.startScanAllHardString()
 
+    
         return;
         
         /********************* 下面代码按需使用  *********************/
@@ -52,11 +53,16 @@ class ViewController: NSViewController {
         
         
         // 功能
-        // 图片增加透明度0.05黑色遮罩
+        // ImageAsset图片增加透明度0.05黑色遮罩
         imageer.imgsMap.forEach { (_, item) in
-            ImageChangeUnit.maskImage(item)
+            ImageChangeUnit.maskAssetImage(item)
         }
         
+        // 功能
+        // Bundle图片增加透明度0.05黑色遮罩
+        imageer.bundles.forEach { item in
+            ImageChangeUnit.maskBundleImage(item)
+        }
         
         
         // 功能

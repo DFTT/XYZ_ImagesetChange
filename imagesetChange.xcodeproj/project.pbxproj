@@ -10,8 +10,9 @@
 		4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */ = {isa = PBXBuildFile; fileRef = 4713BCF126BBB9EC00AF0C97 /* modify_hash.py */; };
 		4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4713BCF426BBC17E00AF0C97 /* HashModify.m */; };
 		5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */; };
-		5B65718126BA29D700194F5D /* ImagesetFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesetFinder.swift */; };
+		5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesFinder.swift */; };
 		5B65718326BA953200194F5D /* CodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718226BA953200194F5D /* CodeFinder.swift */; };
+		5BA23D57283E2C6700C9FA82 /* Test_bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */; };
 		5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0C74226B84A6D008F310F /* AppDelegate.swift */; };
 		5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0C74426B84A6D008F310F /* ViewController.swift */; };
 		5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0C74626B84A6F008F310F /* Assets.xcassets */; };
@@ -26,8 +27,9 @@
 		5B0B556326BB8E9C0021AE85 /* imagesetChange-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "imagesetChange-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_oc_hardString.h; sourceTree = "<group>"; };
 		5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_oc_hardString.m; sourceTree = "<group>"; };
-		5B65718026BA29D700194F5D /* ImagesetFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesetFinder.swift; sourceTree = "<group>"; };
+		5B65718026BA29D700194F5D /* ImagesFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFinder.swift; sourceTree = "<group>"; };
 		5B65718226BA953200194F5D /* CodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeFinder.swift; sourceTree = "<group>"; };
+		5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Test_bundle.bundle; sourceTree = "<group>"; };
 		5BC0C73F26B84A6D008F310F /* imagesetChange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imagesetChange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC0C74226B84A6D008F310F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BC0C74426B84A6D008F310F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BA23D54283E2C2500C9FA82 /* HashModify */ = {
+			isa = PBXGroup;
+			children = (
+				4713BCF326BBC17E00AF0C97 /* HashModify.h */,
+				4713BCF426BBC17E00AF0C97 /* HashModify.m */,
+				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
+			);
+			path = HashModify;
+			sourceTree = "<group>";
+		};
+		5BA23D55283E2C4300C9FA82 /* ImageMask */ = {
+			isa = PBXGroup;
+			children = (
+				5B65718026BA29D700194F5D /* ImagesFinder.swift */,
+				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
+				5B65718226BA953200194F5D /* CodeFinder.swift */,
+			);
+			path = ImageMask;
+			sourceTree = "<group>";
+		};
 		5BC0C73626B84A6D008F310F = {
 			isa = PBXGroup;
 			children = (
@@ -70,14 +92,11 @@
 			children = (
 				5BC0C74226B84A6D008F310F /* AppDelegate.swift */,
 				5BC0C74426B84A6D008F310F /* ViewController.swift */,
-				5B65718026BA29D700194F5D /* ImagesetFinder.swift */,
-				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
-				5B65718226BA953200194F5D /* CodeFinder.swift */,
-				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
-				4713BCF326BBC17E00AF0C97 /* HashModify.h */,
-				4713BCF426BBC17E00AF0C97 /* HashModify.m */,
+				5BA23D55283E2C4300C9FA82 /* ImageMask */,
+				5BA23D54283E2C2500C9FA82 /* HashModify */,
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
 				5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */,
+				5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */,
 				5BC0C74626B84A6F008F310F /* Assets.xcassets */,
 				5BC0C74826B84A6F008F310F /* Main.storyboard */,
 				5BC0C74B26B84A6F008F310F /* Info.plist */,
@@ -147,6 +166,7 @@
 			files = (
 				5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */,
 				5BC0C74A26B84A6F008F310F /* Main.storyboard in Resources */,
+				5BA23D57283E2C6700C9FA82 /* Test_bundle.bundle in Resources */,
 				4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,7 +182,7 @@
 				5B65718326BA953200194F5D /* CodeFinder.swift in Sources */,
 				5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */,
 				4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */,
-				5B65718126BA29D700194F5D /* ImagesetFinder.swift in Sources */,
+				5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */,
 				5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */,
 				5BEEB7FA26C67B06000FAE8A /* ImageChangeUnit.swift in Sources */,
 			);

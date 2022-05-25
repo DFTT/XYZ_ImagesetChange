@@ -1,5 +1,5 @@
 //
-//  ImagesetFinder.swift
+//  ImagesFinder.swift
 //  imagesetChange
 //
 //  Created by 大大东 on 2021/8/4.
@@ -7,23 +7,30 @@
 
 import Foundation
 
-extension ImagesetFinder.ImgsetItem: Hashable {
+extension ImagesFinder.ImgassetItem: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(absURL)
     }
 }
 
-class ImagesetFinder {
-    struct ImgsetItem {
+class ImagesFinder {
+    struct ImgassetItem {
         let name: String
         let absURL: URL
     }
     
-    /// imageset Name : item
-    private(set) var imgsMap = [String : ImgsetItem]()
-    init() {}
+    /// imageAsset Name : item
+    private(set) var imgsMap = [String: ImgassetItem]()
     
+    struct BundleItem {
+        let absURL: URL
+    }
+
+    /// .bundle
+    private(set) var bundles = [BundleItem]()
+    
+    init() {}
     
     /// 判断一个硬编码字符串是否存在对应的 .imageset
     /// - Parameter name: 硬编码字符串
@@ -36,6 +43,11 @@ class ImagesetFinder {
         return imgsMap[name] != nil
     }
     
+    /// 修改xx.imageset名称 (请结合修改代码中的硬编码使用), 会同时修改图片文件名, 保持和xx.imageset统一
+    /// - Parameters:
+    ///   - oldname: 旧名称
+    ///   - newname: 新名称
+    /// - Returns: 是否修改成功
     func reNameImageset(oldname: String, newname: String) -> Bool {
         guard !imgsMap.isEmpty else {
             print("请先 调用查找")
@@ -56,13 +68,80 @@ class ImagesetFinder {
         } catch _ {
             res = false
         }
+        // 同时 修改图片文件名
+        if res {
+            p__changeSetFileName(item) { name in
+                name
+            }
+        }
         return res
     }
 }
-// MARK: 修改扫描出来的 xxx.imageset 中的图片文件名
-extension ImagesetFinder {
+
+// MARK: - 递归扫描目录中的所有 xxx.imageset / xxx.bundle, 本工具的必要前置操作
+
+extension ImagesFinder {
+    /// 递归扫描目录下的所有xxx.imageset文件 并记录
+    /// - Parameter rootPath: 扫描开始的根目录
+    func startScanFrom(rootPath: String) {
+        let url = URL(fileURLWithPath: rootPath)
+        guard url.isFileURL else {
+            print("无效的路径")
+            return
+        }
+        imgsMap.removeAll()
+        p_findAllImgset(url)
+        print("找到 \(imgsMap.count) 个 imageAsset")
+        print("找到 \(bundles.count) 个 imageBundle")
+    }
     
-    /// 根据已经扫描出来的imageset路径 逐个修改对应的fileName (不会修改 imageset Name 代码取图不受影响)
+    private func p_findAllImgset(_ path: URL) {
+        func _saveImgAsset(path: URL) {
+            let lastCom = path.lastPathComponent
+            
+            let item = ImgassetItem(name: String(lastCom.prefix(lastCom.count - path.pathExtension.count - 1)),
+                                    absURL: path)
+            guard imgsMap[item.name] == nil else {
+                print("Error: 发现重名的.imageset -> \(lastCom)")
+                return
+            }
+            imgsMap[item.name] = item
+        }
+        
+        func _seveImgsFrom(bundleURL: URL) {
+            bundles.append(BundleItem(absURL: path));
+        }
+        
+        
+        if path.pathExtension == "imageset" {
+            _saveImgAsset(path: path)
+            return
+        }
+        if path.pathExtension == "bundle" {
+            _seveImgsFrom(bundleURL: path)
+            return
+        }
+        
+        let filemgr = FileManager.default
+        guard let contentURLs = try? filemgr.contentsOfDirectory(at: path, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles),
+              !contentURLs.isEmpty
+        else {
+            // print("此目录为空 跳过: \(path)")
+            return
+        }
+        
+        for suburl in contentURLs {
+            if let _ = (try? suburl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory {
+                p_findAllImgset(suburl)
+            }
+        }
+    }
+}
+
+// MARK: - 修改扫描出来的 xxx.imageset 中的图片文件名
+
+extension ImagesFinder {
+    /// 仅仅修改imageset中的图片文件名 (不会修改 imageset Name, 代码取图不受影响)
     /// - Parameter block: 回传原imagesetName 请按照需要的规则修改后 返回新的fileName
     func reNameAllImageFile(_ block: (String) -> String) {
         guard !imgsMap.isEmpty else {
@@ -70,11 +149,12 @@ extension ImagesetFinder {
             return
         }
         
-        imgsMap.forEach { (_, setitem) in
-           p__changeSetFileName(setitem, nameBlock: block)
+        imgsMap.forEach { _, setitem in
+            p__changeSetFileName(setitem, nameBlock: block)
         }
     }
-    private func p__changeSetFileName(_ setitem: ImgsetItem, nameBlock: (String) -> String) {
+    
+    private func p__changeSetFileName(_ setitem: ImgassetItem, nameBlock: (String) -> String) {
         let fileMgr = FileManager.default
 
         let jsonPath = setitem.absURL.appendingPathComponent("Contents.json")
@@ -129,58 +209,9 @@ extension ImagesetFinder {
     }
 }
 
+// MARK: - 移动扫描出来的 xxx.imageset 中的图片文件到同一个目录 (或反向放回), 方便美术那面批量重新导出, 不修改任何配置, 使用场景较少
 
-// MARK: 扫描工程目录中的 xxx.imageset
-extension ImagesetFinder {
-    
-    /// 递归扫描目录下的所有xxx.imageset文件 并记录
-    /// - Parameter rootPath: 扫描开始的根目录
-    func startScanFrom(rootPath: String) {
-        let url = URL(fileURLWithPath: rootPath)
-        guard url.isFileURL else {
-            print("无效的路径")
-            return
-        }
-        imgsMap.removeAll()
-        p_findAllImgset(url)
-        print("找到 \(imgsMap.count) 个 imageset")
-    }
-    
-    private func p_findAllImgset(_ path: URL) {
-        func _save(path: URL) {
-            let lastCom = path.lastPathComponent
-            
-            let item = ImgsetItem(name: String(lastCom.prefix(lastCom.count - path.pathExtension.count - 1)),
-                               absURL: path)
-            guard nil == imgsMap[item.name] else {
-                print("Error: 发现重名的.imageset -> \(lastCom)")
-                return
-            }
-            imgsMap[item.name] = item
-        }
-        
-        if path.pathExtension == "imageset" {
-            _save(path: path)
-            return
-        }
-        let filemgr = FileManager.default
-        guard let contentURLs = try? filemgr.contentsOfDirectory(at: path, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles),
-              !contentURLs.isEmpty else {
-            // print("此目录为空 跳过: \(path)")
-            return
-        }
-        
-        for suburl in contentURLs {
-            if let _ = (try? suburl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory {
-                p_findAllImgset(suburl)
-            }
-        }
-    }
-}
-
-// MARK: 移动扫描出来的 xxx.imageset 中的图片文件到同一个目录 (或反向放回), 方便美术那面批量重新导出, 不修改任何配置
-extension ImagesetFinder {
-    
+extension ImagesFinder {
     /// 移动扫描出来的 xxx.imageset 中的图片文件到同一个目录,方便美术那面批量重新导出,不修改任何配置
     /// - Parameter dirpath: 存放所有图片的目录
     func moveAllImagestTo(dirpath: String) {
@@ -188,7 +219,7 @@ extension ImagesetFinder {
         guard !p__checkBeforMove(dirURL: url) else {
             return
         }
-        imgsMap.forEach { (_, setitem) in
+        imgsMap.forEach { _, setitem in
             p__moveImgFile(setitem, dirURL: url, goback: false)
         }
     }
@@ -200,7 +231,7 @@ extension ImagesetFinder {
         guard !p__checkBeforMove(dirURL: url) else {
             return
         }
-        imgsMap.forEach { (_, setitem) in
+        imgsMap.forEach { _, setitem in
             p__moveImgFile(setitem, dirURL: url, goback: true)
         }
     }
@@ -217,7 +248,8 @@ extension ImagesetFinder {
         try? FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
         return true
     }
-    private func p__moveImgFile(_ setitem: ImgsetItem, dirURL: URL, goback: Bool) {
+
+    private func p__moveImgFile(_ setitem: ImgassetItem, dirURL: URL, goback: Bool) {
         let fileMgr = FileManager.default
 
         let jsonPath = setitem.absURL.appendingPathComponent("Contents.json")
@@ -245,7 +277,7 @@ extension ImagesetFinder {
                     print("移动失败: \(newURL) \n \(oldURL)")
                     return
                 }
-            }else {
+            } else {
                 guard let _ = try? fileMgr.moveItem(at: oldURL, to: newURL) else {
                     print("移动失败: \(newURL) \n \(oldURL)")
                     return
