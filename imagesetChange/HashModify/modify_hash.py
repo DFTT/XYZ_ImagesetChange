@@ -2,7 +2,7 @@
 
 import os, sys
 
-ignore_ext_list = ['h', 'm', 'pch', 'swift', 'storyboard', 'xib']
+modify_ext_list = ['webp', 'svga', 'mp3', 'png', 'jpg']
 
 def modifyFileHashWithPath(dir_path):
     for f in os.listdir(dir_path):
@@ -14,7 +14,7 @@ def modifyFileHashWithPath(dir_path):
         if len(splitArr) < 2:
             continue
         ext = splitArr[1]
-        if ext in ignore_ext_list:
+        if ext not in modify_ext_list:
             continue
         new_path = os.path.join(dir_path, 'bak_' + f)
         file = open(path, 'rb')
