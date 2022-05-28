@@ -53,7 +53,7 @@ class ImagesFinder {
             print("请先 调用查找")
             return false
         }
-        guard let item = imgsMap[oldname] else {
+        guard var item = imgsMap[oldname] else {
             // 无对应图片资源
             return false
         }
@@ -65,6 +65,9 @@ class ImagesFinder {
         var res = true
         do {
             try FileManager.default.moveItem(at: item.absURL, to: newURL)
+            // 更新url
+            item = ImgassetItem(name: item.name, absURL: newURL)
+            imgsMap[oldname] = item
         } catch _ {
             res = false
         }
@@ -109,9 +112,8 @@ extension ImagesFinder {
         }
         
         func _seveImgsFrom(bundleURL: URL) {
-            bundles.append(BundleItem(absURL: path));
+            bundles.append(BundleItem(absURL: path))
         }
-        
         
         if path.pathExtension == "imageset" {
             _saveImgAsset(path: path)
