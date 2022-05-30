@@ -125,7 +125,9 @@ class CodeFinder {
                 res = false
             }
         }
-        print("部分代码文件修改失败 建议git放弃本次修改 检查原因后重试")
+        if res == false {
+            print("部分代码文件修改失败 建议git放弃本次修改 检查原因后重试")
+        }
         return res
     }
 }

@@ -66,7 +66,7 @@ class ImagesFinder {
         do {
             try FileManager.default.moveItem(at: item.absURL, to: newURL)
             // 更新url
-            item = ImgassetItem(name: item.name, absURL: newURL)
+            item = ImgassetItem(name: newname, absURL: newURL)
             imgsMap[oldname] = item
         } catch _ {
             res = false

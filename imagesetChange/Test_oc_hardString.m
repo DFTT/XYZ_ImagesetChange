@@ -9,6 +9,8 @@
 
 @implementation Test_oc_hardString
 - (void)test__ {
+    @"ImageTest_jpeg";
+    @"ImageTest_png";
     @"正常的";
     @"'单引号'";
     @"\"双引号\"";
