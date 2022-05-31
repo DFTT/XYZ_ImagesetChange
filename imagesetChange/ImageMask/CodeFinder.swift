@@ -43,10 +43,10 @@ class CodeFinder {
     
     /// 开始递归扫描文件夹 获取全部的硬编码字符串
     func startScanAllHardString() {
-        guard let ocRegExp = try? NSRegularExpression(pattern: "@\".+\"", options: .caseInsensitive) else {
+        guard let ocRegExp = try? NSRegularExpression(pattern: "@\".+?\"", options: .caseInsensitive) else {
             return
         }
-        guard let swiftRegExp = try? NSRegularExpression(pattern: "\".+\"", options: .caseInsensitive) else {
+        guard let swiftRegExp = try? NSRegularExpression(pattern: "\".+?\"", options: .caseInsensitive) else {
             return
         }
         func __findHardStr(file: FileItem) {
@@ -54,7 +54,7 @@ class CodeFinder {
                 return
             }
             let regExp = file.isSwiftFile ? swiftRegExp : ocRegExp
-            let resArr = regExp.matches(in: fileContent, options: .Element(rawValue: 0), range: NSRange(location: 0, length: fileContent.count))
+            let resArr = regExp.matches(in: fileContent, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSRange(location: 0, length: fileContent.count))
             guard !resArr.isEmpty else {
                 return
             }
