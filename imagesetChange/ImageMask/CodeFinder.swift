@@ -100,6 +100,24 @@ class CodeFinder {
     ///   - files: 需要修改的文件数组
     /// - Returns: 修改结果
     @discardableResult func changeHardSting(old: String, new: String, files: [FileItem]) -> Bool {
+        func __changeIBFile(_ url: URL, olds: String, news: String) -> String? {
+            guard let regExp = try? NSRegularExpression(pattern: "\"\(olds)\"", options: .caseInsensitive) else {
+                return nil
+            }
+            guard var fileContent = try? String(contentsOf: url), !fileContent.isEmpty else {
+                return nil
+            }
+            let matchRes = regExp.matches(in: fileContent, range: NSRange(location: 0, length: fileContent.count))
+            guard !matchRes.isEmpty else {
+                return nil
+            }
+            matchRes.reversed().forEach { res in
+                let start = fileContent.index(fileContent.startIndex, offsetBy: res.range.location)
+                let end =  fileContent.index(fileContent.startIndex, offsetBy: res.range.location + res.range.length)
+                fileContent.replaceSubrange(start..<end, with: "\"\(news)\"")
+            }
+            return fileContent
+        }
         func __whrite(str: String, to: URL) -> Bool {
             var writeRes = true
             do {
@@ -122,6 +140,22 @@ class CodeFinder {
             :
             fileContent.replacingOccurrences(of: "@\"\(old)\"", with: "@\"\(new)\"")
             if __whrite(str: newFileContent, to: item.absURL) == false {
+                res = false
+            }
+        }
+        
+        // sb xib也修改下
+        xibFileItems.forEach { item in
+            if let newContent = __changeIBFile(item.absURL, olds: old, news: new),
+               !newContent.isEmpty,
+               __whrite(str: newContent, to: item.absURL) == false {
+                res = false
+            }
+        }
+        storyboardFileItems.forEach { item in
+            if let newContent = __changeIBFile(item.absURL, olds: old, news: new),
+               !newContent.isEmpty,
+               __whrite(str: newContent, to: item.absURL) == false {
                 res = false
             }
         }
