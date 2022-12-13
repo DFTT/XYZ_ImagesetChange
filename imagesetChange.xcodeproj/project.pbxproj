@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */ = {isa = PBXBuildFile; fileRef = 4713BCF126BBB9EC00AF0C97 /* modify_hash.py */; };
 		4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4713BCF426BBC17E00AF0C97 /* HashModify.m */; };
+		5B084E4E2946C98A00F41F3E /* ResourcesFileCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B084E4D2946C98A00F41F3E /* ResourcesFileCompare.swift */; };
 		5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */; };
 		5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesFinder.swift */; };
 		5B65718326BA953200194F5D /* CodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718226BA953200194F5D /* CodeFinder.swift */; };
@@ -24,6 +25,7 @@
 		4713BCF126BBB9EC00AF0C97 /* modify_hash.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = modify_hash.py; sourceTree = "<group>"; };
 		4713BCF326BBC17E00AF0C97 /* HashModify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashModify.h; sourceTree = "<group>"; };
 		4713BCF426BBC17E00AF0C97 /* HashModify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HashModify.m; sourceTree = "<group>"; };
+		5B084E4D2946C98A00F41F3E /* ResourcesFileCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesFileCompare.swift; sourceTree = "<group>"; };
 		5B0B556326BB8E9C0021AE85 /* imagesetChange-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "imagesetChange-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_oc_hardString.h; sourceTree = "<group>"; };
 		5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_oc_hardString.m; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				5BC0C74226B84A6D008F310F /* AppDelegate.swift */,
 				5BC0C74426B84A6D008F310F /* ViewController.swift */,
+				5B084E4D2946C98A00F41F3E /* ResourcesFileCompare.swift */,
 				5BA23D55283E2C4300C9FA82 /* ImageMask */,
 				5BA23D54283E2C2500C9FA82 /* HashModify */,
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B084E4E2946C98A00F41F3E /* ResourcesFileCompare.swift in Sources */,
 				5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */,
 				5B65718326BA953200194F5D /* CodeFinder.swift in Sources */,
 				5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */,

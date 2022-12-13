@@ -2,7 +2,7 @@
 
 import os, sys
 
-modify_ext_list = ['webp', 'svga', 'mp3', 'png', 'jpg']
+modify_ext_list = ['webp', 'gif', 'svga', 'mp3', 'mp4', 'png', 'jpg']
 
 def modifyFileHashWithPath(dir_path):
     for f in os.listdir(dir_path):
@@ -14,7 +14,11 @@ def modifyFileHashWithPath(dir_path):
         if len(splitArr) < 2:
             continue
         ext = splitArr[1]
-        if ext not in modify_ext_list:
+        if ext.lower() not in modify_ext_list:
+            continue
+        if ".xcassets" in path:
+            continue
+        if ".bundle" in path:
             continue
         new_path = os.path.join(dir_path, 'bak_' + f)
         file = open(path, 'rb')
@@ -30,8 +34,8 @@ def modifyFileHashWithPath(dir_path):
         os.remove(path)
         os.rename(new_path, path)
 
-print '------ modify file hash start path:' + sys.argv[1] + '------'
+print("------ modify file hash start path:" + sys.argv[1] + "------")
 
 modifyFileHashWithPath(sys.argv[1])
 
-print '------ modify file hash finished ------'
+print('------ modify file hash finished ------')

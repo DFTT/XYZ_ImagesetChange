@@ -11,7 +11,7 @@
 
 + (void)modifyHashWithDirPath:(NSString *)dirPath {
     NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"modify_hash" ofType:@"py"];
-    NSString *cmd = [NSString stringWithFormat:@"python %@ %@", scriptPath, dirPath];
+    NSString *cmd = [NSString stringWithFormat:@"python3 %@ %@", scriptPath, dirPath];
     system(cmd.UTF8String);
 }
 

@@ -12,7 +12,7 @@ import Foundation
 class ImageChangeUnit {
     private static var maskCICtx: (ctx: CIContext, maskImage: CIImage) = {
         let ctx = CIContext()
-        let ciimg = CIImage(color: CIColor(red: 0, green: 0, blue: 0, alpha: 0.03)) // 默认 0.03
+        let ciimg = CIImage(color: CIColor(red: 0, green: 0, blue: 0, alpha: 0.05)) // 默认 0.03
         return (ctx, ciimg)
     }()
 
