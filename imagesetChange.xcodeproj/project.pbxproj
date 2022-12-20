@@ -19,6 +19,7 @@
 		5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0C74426B84A6D008F310F /* ViewController.swift */; };
 		5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0C74626B84A6F008F310F /* Assets.xcassets */; };
 		5BC0C74A26B84A6F008F310F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0C74826B84A6F008F310F /* Main.storyboard */; };
+		5BC7C4042951FCC800D20CEB /* XYZUIImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC7C4032951FCC800D20CEB /* XYZUIImageUtil.m */; };
 		5BEEB7FA26C67B06000FAE8A /* ImageChangeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,8 @@
 		5BC0C74926B84A6F008F310F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5BC0C74B26B84A6F008F310F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BC0C74C26B84A6F008F310F /* imagesetChange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = imagesetChange.entitlements; sourceTree = "<group>"; };
+		5BC7C4022951FCC800D20CEB /* XYZUIImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYZUIImageUtil.h; sourceTree = "<group>"; };
+		5BC7C4032951FCC800D20CEB /* XYZUIImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYZUIImageUtil.m; sourceTree = "<group>"; };
 		5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChangeUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +74,8 @@
 				5B65718026BA29D700194F5D /* ImagesFinder.swift */,
 				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
 				5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */,
+				5BC7C4022951FCC800D20CEB /* XYZUIImageUtil.h */,
+				5BC7C4032951FCC800D20CEB /* XYZUIImageUtil.m */,
 				5B65718226BA953200194F5D /* CodeFinder.swift */,
 			);
 			path = ImageMask;
@@ -191,6 +196,7 @@
 				4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */,
 				5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */,
 				5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */,
+				5BC7C4042951FCC800D20CEB /* XYZUIImageUtil.m in Sources */,
 				5B657D2B2950327A00C92F08 /* ImageEncrypt.swift in Sources */,
 				5BEEB7FA26C67B06000FAE8A /* ImageChangeUnit.swift in Sources */,
 			);
