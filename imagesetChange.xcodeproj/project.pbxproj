@@ -13,6 +13,7 @@
 		5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */; };
 		5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesFinder.swift */; };
 		5B65718326BA953200194F5D /* CodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718226BA953200194F5D /* CodeFinder.swift */; };
+		5B657D2B2950327A00C92F08 /* ImageEncrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */; };
 		5BA23D57283E2C6700C9FA82 /* Test_bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */; };
 		5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0C74226B84A6D008F310F /* AppDelegate.swift */; };
 		5BC0C74526B84A6D008F310F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0C74426B84A6D008F310F /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_oc_hardString.m; sourceTree = "<group>"; };
 		5B65718026BA29D700194F5D /* ImagesFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFinder.swift; sourceTree = "<group>"; };
 		5B65718226BA953200194F5D /* CodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeFinder.swift; sourceTree = "<group>"; };
+		5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEncrypt.swift; sourceTree = "<group>"; };
 		5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Test_bundle.bundle; sourceTree = "<group>"; };
 		5BC0C73F26B84A6D008F310F /* imagesetChange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imagesetChange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC0C74226B84A6D008F310F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			children = (
 				5B65718026BA29D700194F5D /* ImagesFinder.swift */,
 				5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */,
+				5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */,
 				5B65718226BA953200194F5D /* CodeFinder.swift */,
 			);
 			path = ImageMask;
@@ -188,6 +191,7 @@
 				4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */,
 				5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */,
 				5BC0C74326B84A6D008F310F /* AppDelegate.swift in Sources */,
+				5B657D2B2950327A00C92F08 /* ImageEncrypt.swift in Sources */,
 				5BEEB7FA26C67B06000FAE8A /* ImageChangeUnit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +341,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xm.common.imageAst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "imagesetChange/imagesetChange-Bridging-Header.h";
@@ -361,6 +366,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xm.common.imageAst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "imagesetChange/imagesetChange-Bridging-Header.h";

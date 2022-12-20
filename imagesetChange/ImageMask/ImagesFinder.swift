@@ -108,6 +108,10 @@ class ImagesFinder {
                 return imgInfo
             }
             
+            if scale == "1" {
+                print("发现 1x 图片, 请修改或删除: \(setitem.name)")
+            }
+            
             let newFileName = "\(setitem.name)@\(scale)" + "." + (filename as NSString).pathExtension
         
             let oldURL = dicURL.appendingPathComponent(filename)

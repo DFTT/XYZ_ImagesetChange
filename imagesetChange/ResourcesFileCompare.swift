@@ -17,47 +17,45 @@ enum CodesignRFCompare {
         let files2: [String: Item]
     }
 
-    static func compare(CRFile1Path: String, CRFile2Path: String) {
-        func analysisFile(_ path: String) -> CodesignRCFile? {
-            guard let dic = try? NSDictionary(contentsOf: URL(fileURLWithPath: path), error: ()),
-                  let ft = dic["files"] as? [String: Any], let ft2 = dic["files2"] as? [String: Any]
-            else {
-                return nil
-            }
+    // 单独比较是否有 同名文件
+    static func compareAnyFileName(CRFile1Path: String, CRFile2Path: String) {
+        guard let file1 = analysisFile(CRFile1Path), let file2 = analysisFile(CRFile2Path) else {
+            print("解析失败")
+            return
+        }
+        let intersectionNames = Set(file1.files.map { $0.value.name }).intersection(Set(file2.files.map { $0.value.name }))
+        if intersectionNames.isEmpty == false {
+            print("发现同名文件files: \n \(intersectionNames)")
+        }
+        let intersectionNames2 = Set(file1.files2.map { $0.value.name }).intersection(Set(file2.files2.map { $0.value.name }))
+        if intersectionNames2.isEmpty == false {
+            print("发现同名文件files2: \n \(intersectionNames2)")
+        }
+    }
 
-            let filesD: [(String, Data)] = ft.compactMap { (key: String, value: Any) in
-                if let value = value as? Data {
-                    return (key, value) as (String, Data)
-                }
-                if let vmap = value as? [String: Any], let data = vmap["hash"] as? Data {
-                    return (key, data) as (String, Data)
-                }
-                print("解析失败: \(key) : \(value)")
-                return nil
+    // 单独比较是否有 相同hash
+    static func compareAnyHash(CRFile1Path: String, CRFile2Path: String) {
+        guard let file1 = analysisFile(CRFile1Path), let file2 = analysisFile(CRFile2Path) else {
+            print("解析失败")
+            return
+        }
+        let filesHashs = Set(file1.files.map { $0.value.base64Hash })
+        file2.files.forEach { (_: String, value: Item) in
+            if filesHashs.contains(value.base64Hash) {
+                print("发现hash重复files -> hash: \(value)")
             }
-
-            let files2D: [(String, Data)] = ft2.compactMap { (key: String, value: Any) in
-//                if let value = value as? Data {
-//                    return (key, value) as (String, Data)
-//                }
-                if let vmap = value as? [String: Any], let data = vmap["hash2"] as? Data {
-                    return (key, data) as (String, Data)
-                }
-                print("解析失败: \(key) : \(value)")
-                return nil
-            }
-
-            var files = [String: Item]()
-            for sub in filesD {
-                files[sub.0] = Item(name: sub.0, base64Hash: sub.1.base64EncodedString())
-            }
-            var files2 = [String: Item]()
-            for sub in files2D {
-                files2[sub.0] = Item(name: sub.0, base64Hash: sub.1.base64EncodedString())
-            }
-            return CodesignRCFile(files: files, files2: files2)
         }
 
+        let filesHashs2 = Set(file1.files2.map { $0.value.base64Hash })
+        file2.files2.forEach { (_: String, value: Item) in
+            if filesHashs2.contains(value.base64Hash) {
+                print("发现hash重复files2 -> hash: \(value)")
+            }
+        }
+    }
+
+    // 根据同名比较hash
+    static func compareSameNameFileHash(CRFile1Path: String, CRFile2Path: String) {
         guard let file1 = analysisFile(CRFile1Path), let file2 = analysisFile(CRFile2Path) else {
             print("解析失败")
             return
@@ -74,5 +72,45 @@ enum CodesignRFCompare {
                 print("发现重复files2 -> hash: \(item)")
             }
         }
+    }
+
+    private static func analysisFile(_ path: String) -> CodesignRCFile? {
+        guard let dic = try? NSDictionary(contentsOf: URL(fileURLWithPath: path), error: ()),
+              let ft = dic["files"] as? [String: Any], let ft2 = dic["files2"] as? [String: Any]
+        else {
+            return nil
+        }
+
+        let filesD: [(String, Data)] = ft.compactMap { (key: String, value: Any) in
+            if let value = value as? Data {
+                return (key, value) as (String, Data)
+            }
+            if let vmap = value as? [String: Any], let data = vmap["hash"] as? Data {
+                return (key, data) as (String, Data)
+            }
+            print("解析失败: \(key) : \(value)")
+            return nil
+        }
+
+        let files2D: [(String, Data)] = ft2.compactMap { (key: String, value: Any) in
+//                if let value = value as? Data {
+//                    return (key, value) as (String, Data)
+//                }
+            if let vmap = value as? [String: Any], let data = vmap["hash2"] as? Data {
+                return (key, data) as (String, Data)
+            }
+            print("解析失败: \(key) : \(value)")
+            return nil
+        }
+
+        var files = [String: Item]()
+        for sub in filesD {
+            files[sub.0] = Item(name: sub.0, base64Hash: sub.1.base64EncodedString())
+        }
+        var files2 = [String: Item]()
+        for sub in files2D {
+            files2[sub.0] = Item(name: sub.0, base64Hash: sub.1.base64EncodedString())
+        }
+        return CodesignRCFile(files: files, files2: files2)
     }
 }
