@@ -23,14 +23,22 @@ enum CodesignRFCompare {
             print("解析失败")
             return
         }
-        let intersectionNames = Set(file1.files.map { $0.value.name }).intersection(Set(file2.files.map { $0.value.name }))
-        if intersectionNames.isEmpty == false {
-            print("发现同名文件files: \n \(intersectionNames)")
-        }
+//        let intersectionNames = Set(file1.files.map { $0.value.name }).intersection(Set(file2.files.map { $0.value.name }))
+//        if intersectionNames.isEmpty == false {
+//            intersectionNames.forEach { name in
+//                print("发现同名文件files: \(name)\n")
+//            }
+//        }
+//        print(" \n\n ")
+        var count = 0
         let intersectionNames2 = Set(file1.files2.map { $0.value.name }).intersection(Set(file2.files2.map { $0.value.name }))
         if intersectionNames2.isEmpty == false {
-            print("发现同名文件files2: \n \(intersectionNames2)")
+            intersectionNames2.forEach { name in
+                print("发现同名文件files2: \(name)\n")
+                count += 1
+            }
         }
+        print("共发现同名文件files2: \(count)个\n")
     }
 
     // 单独比较是否有 相同hash
@@ -39,19 +47,22 @@ enum CodesignRFCompare {
             print("解析失败")
             return
         }
-        let filesHashs = Set(file1.files.map { $0.value.base64Hash })
-        file2.files.forEach { (_: String, value: Item) in
-            if filesHashs.contains(value.base64Hash) {
-                print("发现hash重复files -> hash: \(value)")
-            }
-        }
+//        let filesHashs = Set(file1.files.map { $0.value.base64Hash })
+//        file2.files.forEach { (_: String, value: Item) in
+//            if filesHashs.contains(value.base64Hash) {
+//                print("发现hash重复files -> hash: \(value)")
+//            }
+//        }
 
+        var count = 0
         let filesHashs2 = Set(file1.files2.map { $0.value.base64Hash })
         file2.files2.forEach { (_: String, value: Item) in
             if filesHashs2.contains(value.base64Hash) {
                 print("发现hash重复files2 -> hash: \(value)")
+                count += 1
             }
         }
+        print("共发现hash重复files2: \(count)个\n")
     }
 
     // 根据同名比较hash
@@ -60,18 +71,21 @@ enum CodesignRFCompare {
             print("解析失败")
             return
         }
-        file1.files.forEach { item in
-            if let hss = file2.files[item.key]?.base64Hash, item.value.base64Hash == hss {
-                print("发现重复files -> hash: \(item)")
-            }
-        }
-        print("\n\n")
+//        file1.files.forEach { item in
+//            if let hss = file2.files[item.key]?.base64Hash, item.value.base64Hash == hss {
+//                print("发现重复files -> hash: \(item)")
+//            }
+//        }
+//        print("\n\n")
 
+        var count = 0
         file1.files2.forEach { item in
             if let hss = file2.files2[item.key]?.base64Hash, item.value.base64Hash == hss {
                 print("发现重复files2 -> hash: \(item)")
+                count += 1
             }
         }
+        print("共发现同名且同hash文件files2: \(count) 个")
     }
 
     private static func analysisFile(_ path: String) -> CodesignRCFile? {

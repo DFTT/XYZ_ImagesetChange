@@ -5,7 +5,6 @@
 //  Created by 大大东 on 2022/12/19.
 //
 
-
 enum ImageEncrypt {
     /// imageSet的图片最终放在一个bundle中
     /// mainBundle中的图片也这样处理 最终放在一个bundle中
@@ -62,15 +61,15 @@ public extension String {
 
         #if swift(>=5.0)
 
-        _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
-            CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
-        }
+            _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
+                CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
+            }
 
         #else
 
-        _ = data.withUnsafeBytes { bytes in
-            CC_MD5(bytes, CC_LONG(data.count), &digest)
-        }
+            _ = data.withUnsafeBytes { bytes in
+                CC_MD5(bytes, CC_LONG(data.count), &digest)
+            }
 
         #endif
 

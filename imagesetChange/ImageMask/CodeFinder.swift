@@ -16,11 +16,11 @@ class CodeFinder {
 
     // 硬编码作为key [FileItem]作为value
     private(set) var hardStringMap = [String: [FileItem]]()
-    
+
     struct FileItem: Hashable {
         let absURL: URL
         var isSwiftFile: Bool = false
-        
+
         func hash(into hasher: inout Hasher) {
             hasher.combine(absURL)
         }
@@ -32,7 +32,7 @@ class CodeFinder {
             print("无效的路径")
             return
         }
-        
+
         p_findAllFile(rtURL: url)
         print("找到 \(hFileItems.count) 个 hFile")
         print("找到 \(mFileItems.count) 个 mFile")
@@ -40,7 +40,7 @@ class CodeFinder {
         print("找到 \(xibFileItems.count) 个 xibFile")
         print("找到 \(storyboardFileItems.count) 个 storyboardFile")
     }
-    
+
     /// 开始递归扫描文件夹 获取全部的硬编码字符串
     func startScanAllHardString() {
         guard let ocRegExp = try? NSRegularExpression(pattern: "@\".+?\"", options: .caseInsensitive) else {
@@ -62,13 +62,13 @@ class CodeFinder {
             resArr.forEach { textCheckingResult in
                 let matchString = (fileContent as NSString).substring(with: textCheckingResult.range)
                 let targetString = (matchString as NSString).substring(with: NSRange(location: location, length: matchString.count - location - 1))
-                
+
                 var values = hardStringMap[targetString] ?? [FileItem]()
                 values.append(file)
                 hardStringMap[targetString] = values
             }
         }
-        
+
 //        hFileItems.forEach { item in
 //            __findHardStr(file: item)
 //        }
@@ -80,7 +80,7 @@ class CodeFinder {
         }
         print("找到 \(hardStringMap.count) 个 硬编码")
     }
-    
+
     /// 从扫描结果中 过滤掉有数字的硬编码
     /// - Returns: 过滤后的map (key硬编码字符串, val硬编码存在的文件信息)
     func noDigitalHardMap() -> [String: [FileItem]]? {
@@ -92,7 +92,7 @@ class CodeFinder {
             return num == 0
         }
     }
-    
+
     /// 修改代码文件中的 硬编码字符串
     /// - Parameters:
     ///   - old: 老的硬编码
@@ -113,8 +113,8 @@ class CodeFinder {
             }
             matchRes.reversed().forEach { res in
                 let start = fileContent.index(fileContent.startIndex, offsetBy: res.range.location)
-                let end =  fileContent.index(fileContent.startIndex, offsetBy: res.range.location + res.range.length)
-                fileContent.replaceSubrange(start..<end, with: "\"\(news)\"")
+                let end = fileContent.index(fileContent.startIndex, offsetBy: res.range.location + res.range.length)
+                fileContent.replaceSubrange(start ..< end, with: "\"\(news)\"")
             }
             return fileContent
         }
@@ -127,7 +127,7 @@ class CodeFinder {
             }
             return writeRes
         }
-        
+
         var res = true
         files.forEach { item in
             guard let fileContent = try? String(contentsOf: item.absURL), !fileContent.isEmpty else {
@@ -136,26 +136,28 @@ class CodeFinder {
                 return
             }
             let newFileContent = item.isSwiftFile ?
-            fileContent.replacingOccurrences(of: "\"\(old)\"", with: "\"\(new)\"")
-            :
-            fileContent.replacingOccurrences(of: "@\"\(old)\"", with: "@\"\(new)\"")
+                fileContent.replacingOccurrences(of: "\"\(old)\"", with: "\"\(new)\"")
+                :
+                fileContent.replacingOccurrences(of: "@\"\(old)\"", with: "@\"\(new)\"")
             if __whrite(str: newFileContent, to: item.absURL) == false {
                 res = false
             }
         }
-        
+
         // sb xib也修改下
         xibFileItems.forEach { item in
             if let newContent = __changeIBFile(item.absURL, olds: old, news: new),
                !newContent.isEmpty,
-               __whrite(str: newContent, to: item.absURL) == false {
+               __whrite(str: newContent, to: item.absURL) == false
+            {
                 res = false
             }
         }
         storyboardFileItems.forEach { item in
             if let newContent = __changeIBFile(item.absURL, olds: old, news: new),
                !newContent.isEmpty,
-               __whrite(str: newContent, to: item.absURL) == false {
+               __whrite(str: newContent, to: item.absURL) == false
+            {
                 res = false
             }
         }
@@ -175,7 +177,7 @@ extension CodeFinder {
             // 不可读 跳过
             return
         }
-        
+
         switch rtURL.pathExtension {
         case "h":
             hFileItems.append(FileItem(absURL: rtURL))

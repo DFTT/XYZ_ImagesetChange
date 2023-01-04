@@ -11,6 +11,7 @@
 		4713BCF526BBC17E00AF0C97 /* HashModify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4713BCF426BBC17E00AF0C97 /* HashModify.m */; };
 		5B084E4E2946C98A00F41F3E /* ResourcesFileCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B084E4D2946C98A00F41F3E /* ResourcesFileCompare.swift */; };
 		5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */; };
+		5B5C008D29559CFF00070DEE /* MatchOCodePageHashCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5C008C29559CFF00070DEE /* MatchOCodePageHashCompare.swift */; };
 		5B65718126BA29D700194F5D /* ImagesFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718026BA29D700194F5D /* ImagesFinder.swift */; };
 		5B65718326BA953200194F5D /* CodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65718226BA953200194F5D /* CodeFinder.swift */; };
 		5B657D2B2950327A00C92F08 /* ImageEncrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */; };
@@ -31,6 +32,7 @@
 		5B0B556326BB8E9C0021AE85 /* imagesetChange-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "imagesetChange-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_oc_hardString.h; sourceTree = "<group>"; };
 		5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_oc_hardString.m; sourceTree = "<group>"; };
+		5B5C008C29559CFF00070DEE /* MatchOCodePageHashCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchOCodePageHashCompare.swift; sourceTree = "<group>"; };
 		5B65718026BA29D700194F5D /* ImagesFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFinder.swift; sourceTree = "<group>"; };
 		5B65718226BA953200194F5D /* CodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeFinder.swift; sourceTree = "<group>"; };
 		5B657D2A2950327A00C92F08 /* ImageEncrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEncrypt.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				5BC0C74226B84A6D008F310F /* AppDelegate.swift */,
 				5BC0C74426B84A6D008F310F /* ViewController.swift */,
 				5B084E4D2946C98A00F41F3E /* ResourcesFileCompare.swift */,
+				5B5C008C29559CFF00070DEE /* MatchOCodePageHashCompare.swift */,
 				5BA23D55283E2C4300C9FA82 /* ImageMask */,
 				5BA23D54283E2C2500C9FA82 /* HashModify */,
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B5C008D29559CFF00070DEE /* MatchOCodePageHashCompare.swift in Sources */,
 				5B084E4E2946C98A00F41F3E /* ResourcesFileCompare.swift in Sources */,
 				5B0B556626BB8E9D0021AE85 /* Test_oc_hardString.m in Sources */,
 				5B65718326BA953200194F5D /* CodeFinder.swift in Sources */,

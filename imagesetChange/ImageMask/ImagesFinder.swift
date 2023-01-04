@@ -19,19 +19,19 @@ class ImagesFinder {
         let name: String
         let absURL: URL
     }
-    
+
     /// imageAsset Name : item
     private(set) var imgsMap = [String: ImgassetItem]()
-    
+
     struct BundleItem {
         let absURL: URL
     }
 
     /// .bundle
     private(set) var bundles = [BundleItem]()
-    
+
     init() {}
-    
+
     /// 判断一个硬编码字符串是否存在对应的 .imageset
     /// - Parameter name: 硬编码字符串
     /// - Returns: true mean exist
@@ -42,7 +42,7 @@ class ImagesFinder {
         }
         return imgsMap[name] != nil
     }
-    
+
     /// 修改xx.imageset名称 (请结合修改代码中的硬编码使用), 会同时修改图片文件名, 保持和xx.imageset统一
     /// - Parameters:
     ///   - oldname: 旧名称
@@ -75,14 +75,14 @@ class ImagesFinder {
         } catch _ {
             res = false
         }
-        
+
         // 同时 修改文件名等于imageset name
         if res {
             makeImageFileNameEqualImageSetName(item)
         }
         return res
     }
-    
+
     /// 修改ImageSet中的图片文件名等同于ImageSet的名称
     /// - Parameter setitem: setitem
     func makeImageFileNameEqualImageSetName(_ setitem: ImgassetItem) {
@@ -97,7 +97,7 @@ class ImagesFinder {
             print("config配置无效: \(jsonPath)")
             return
         }
-    
+
         let dicURL = setitem.absURL
         var flag = false // 是否需要回写aset.config
         let newImgs = imgs.map { imgInfo -> [String: Any] in
@@ -107,16 +107,16 @@ class ImagesFinder {
                 // 不修改
                 return imgInfo
             }
-            
+
             if scale == "1" {
                 print("发现 1x 图片, 请修改或删除: \(setitem.name)")
             }
-            
+
             let newFileName = "\(setitem.name)@\(scale)" + "." + (filename as NSString).pathExtension
-        
+
             let oldURL = dicURL.appendingPathComponent(filename)
             let newURL = dicURL.appendingPathComponent(newFileName)
-        
+
             guard let _ = try? fileMgr.moveItem(at: oldURL, to: newURL) else {
                 // 改名失败 不修改
                 return imgInfo
@@ -156,16 +156,16 @@ extension ImagesFinder {
         }
         imgsMap.removeAll()
         bundles.removeAll()
-        
+
         p_findAllImgset(url)
-        
+
         print("找到 \(imgsMap.count) 个 imageAsset")
         print("找到 \(bundles.count) 个 imageBundle")
-        
+
         func p_findAllImgset(_ path: URL) {
             func _saveImgAsset(path: URL) {
                 let lastCom = path.lastPathComponent
-                
+
                 let item = ImgassetItem(name: String(lastCom.prefix(lastCom.count - path.pathExtension.count - 1)),
                                         absURL: path)
                 guard imgsMap[item.name] == nil else {
@@ -174,11 +174,11 @@ extension ImagesFinder {
                 }
                 imgsMap[item.name] = item
             }
-            
-            func _seveImgsFrom(bundleURL: URL) {
+
+            func _seveImgsFrom(bundleURL _: URL) {
                 bundles.append(BundleItem(absURL: path))
             }
-            
+
             if path.pathExtension == "imageset" {
                 _saveImgAsset(path: path)
                 return
@@ -187,7 +187,7 @@ extension ImagesFinder {
                 _seveImgsFrom(bundleURL: path)
                 return
             }
-            
+
             let filemgr = FileManager.default
             guard let contentURLs = try? filemgr.contentsOfDirectory(at: path, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles),
                   !contentURLs.isEmpty
@@ -195,7 +195,7 @@ extension ImagesFinder {
                 // print("此目录为空 跳过: \(path)")
                 return
             }
-            
+
             for suburl in contentURLs {
                 if let _ = (try? suburl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory {
                     p_findAllImgset(suburl)
@@ -219,7 +219,7 @@ extension ImagesFinder {
             p__moveImgFile(setitem, dirURL: url, goback: false)
         }
     }
-    
+
     /// 反向移动 扫描出来的 xxx.imageset 中的图片文件到同一个目录,方便美术那面批量重新导出,不修改任何配置
     /// - Parameter dirpath:  存在所有图片的目录
     func moveBackAllImageFrom(dirpath: String) {
@@ -231,7 +231,7 @@ extension ImagesFinder {
             p__moveImgFile(setitem, dirURL: url, goback: true)
         }
     }
-    
+
     private func p__checkBeforMove(dirURL: URL) -> Bool {
         guard !imgsMap.isEmpty else {
             print("请先 调用查找")
@@ -259,15 +259,15 @@ extension ImagesFinder {
         }
 
         let setURL = setitem.absURL
-        
+
         imgs.forEach { item in
             guard let filename = item["filename"] as? String else {
                 return
             }
-            
+
             let oldURL = setURL.appendingPathComponent(filename)
             let newURL = dirURL.appendingPathComponent(filename)
-            
+
             if goback {
                 guard let _ = try? fileMgr.moveItem(at: newURL, to: oldURL) else {
                     print("移动失败: \(newURL) \n \(oldURL)")
