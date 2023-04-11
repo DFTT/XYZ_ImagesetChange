@@ -21,6 +21,7 @@
 		5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0C74626B84A6F008F310F /* Assets.xcassets */; };
 		5BC0C74A26B84A6F008F310F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0C74826B84A6F008F310F /* Main.storyboard */; };
 		5BC7C4042951FCC800D20CEB /* XYZUIImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC7C4032951FCC800D20CEB /* XYZUIImageUtil.m */; };
+		5BDE3F8629E426CF0084A01C /* tryModifyFileXMPWithPath.py in Resources */ = {isa = PBXBuildFile; fileRef = 5BDE3F8529E426CF0084A01C /* tryModifyFileXMPWithPath.py */; };
 		5BEEB7FA26C67B06000FAE8A /* ImageChangeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		5BC0C74C26B84A6F008F310F /* imagesetChange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = imagesetChange.entitlements; sourceTree = "<group>"; };
 		5BC7C4022951FCC800D20CEB /* XYZUIImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYZUIImageUtil.h; sourceTree = "<group>"; };
 		5BC7C4032951FCC800D20CEB /* XYZUIImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYZUIImageUtil.m; sourceTree = "<group>"; };
+		5BDE3F8529E426CF0084A01C /* tryModifyFileXMPWithPath.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = tryModifyFileXMPWithPath.py; sourceTree = "<group>"; };
 		5BEEB7F926C67B06000FAE8A /* ImageChangeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChangeUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +67,7 @@
 			children = (
 				4713BCF326BBC17E00AF0C97 /* HashModify.h */,
 				4713BCF426BBC17E00AF0C97 /* HashModify.m */,
+				5BDE3F8529E426CF0084A01C /* tryModifyFileXMPWithPath.py */,
 				4713BCF126BBB9EC00AF0C97 /* modify_hash.py */,
 			);
 			path = HashModify;
@@ -109,8 +112,8 @@
 				5BA23D55283E2C4300C9FA82 /* ImageMask */,
 				5BA23D54283E2C2500C9FA82 /* HashModify */,
 				5B0B556426BB8E9D0021AE85 /* Test_oc_hardString.h */,
-				5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */,
 				5BA23D56283E2C6700C9FA82 /* Test_bundle.bundle */,
+				5B0B556526BB8E9D0021AE85 /* Test_oc_hardString.m */,
 				5BC0C74626B84A6F008F310F /* Assets.xcassets */,
 				5BC0C74826B84A6F008F310F /* Main.storyboard */,
 				5BC0C74B26B84A6F008F310F /* Info.plist */,
@@ -181,6 +184,7 @@
 				5BC0C74726B84A6F008F310F /* Assets.xcassets in Resources */,
 				5BC0C74A26B84A6F008F310F /* Main.storyboard in Resources */,
 				5BA23D57283E2C6700C9FA82 /* Test_bundle.bundle in Resources */,
+				5BDE3F8629E426CF0084A01C /* tryModifyFileXMPWithPath.py in Resources */,
 				4713BCF226BBB9ED00AF0C97 /* modify_hash.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

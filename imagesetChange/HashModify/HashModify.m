@@ -15,4 +15,10 @@
     system(cmd.UTF8String);
 }
 
+
++ (void)modifyFileXMPWithDirPath:(NSString *)dirPath {
+    NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"tryModifyFileXMPWithPath" ofType:@"py"];
+    NSString *cmd = [NSString stringWithFormat:@"python3 %@ %@", scriptPath, dirPath];
+    system(cmd.UTF8String);
+}
 @end

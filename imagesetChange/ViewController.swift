@@ -13,15 +13,17 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        MatchOCodePageHashCompare.compareClassName(source: "/Users/dadadongl/Desktop/tt.txt",
-                                                   des: "/Users/dadadongl/Desktop/dn.txt")
+//        MatchOCodePageHashCompare.compareClassName(source: "/Users/dadadongl/Desktop/tt.txt",
+//                                                   des: "/Users/dadadongl/Desktop/dn.txt")
 //        MatchOCodePageHashCompare.compare(source: "/Users/dadadongl/Desktop/dtcmp/tt.txt",
 //                                          des: "/Users/dadadongl/Desktop/dtcmp/dn.txt")
 
-//        CodesignRFCompare.compareAnyHash(CRFile1Path: "/Users/dadadongl/Desktop/dtcmp/dn_CodeResources",
-//                                         CRFile2Path: "/Users/dadadongl/Desktop/dtcmp/tt_CodeResources")
-//        CodesignRFCompare.compareAnyFileName(CRFile1Path: "/Users/dadadongl/Desktop/dtcmp/dn_CodeResources",
-//                                             CRFile2Path: "/Users/dadadongl/Desktop/dtcmp/tt_CodeResources")
+        CodesignRFCompare.compareAnyHash(CRFile1Path: "/Users/dadadongl/Desktop/CodeResources_wowo",
+                                         CRFile2Path: "/Users/dadadongl/Desktop/CodeResources_ic")
+        CodesignRFCompare.compareAnyFileName(CRFile1Path: "/Users/dadadongl/Desktop/CodeResources_wowo",
+                                             CRFile2Path: "/Users/dadadongl/Desktop/CodeResources_ic")
+        
+
         return;
 
         let imageer = ImagesFinder()
@@ -35,6 +37,11 @@ class ViewController: NSViewController {
         // 功能
         // 仅修改 图片文件的 hash
         HashModify.modifyHash(withDirPath: projectRootDir)
+        
+        // 功能
+        // 仅修改 图片 视频 音频 文件的元数据XMP
+        HashModify.modifyFileXMP(withDirPath: projectRootDir)
+
 
         print("修改imageset名称结束")
 

@@ -33,12 +33,18 @@ enum CodesignRFCompare {
         var count = 0
         let intersectionNames2 = Set(file1.files2.map { $0.value.name }).intersection(Set(file2.files2.map { $0.value.name }))
         if intersectionNames2.isEmpty == false {
-            intersectionNames2.forEach { name in
+            intersectionNames2.sorted().forEach { name in
                 print("发现同名文件files2: \(name)\n")
                 count += 1
             }
         }
-        print("共发现同名文件files2: \(count)个\n")
+        print("""
+              共发现同名文件files2: \(count)个
+              \(Float(count) / Float(file2.files2.count))
+              \(Float(count) / Float(file1.files2.count))
+              \n
+              """
+        )
     }
 
     // 单独比较是否有 相同hash
@@ -62,7 +68,12 @@ enum CodesignRFCompare {
                 count += 1
             }
         }
-        print("共发现hash重复files2: \(count)个\n")
+        print("""
+             共发现hash重复files2: \(count)个
+             \(Float(count) / Float(file2.files2.count))
+             \(Float(count) / Float(file1.files2.count))
+             \n
+             """)
     }
 
     // 根据同名比较hash
@@ -85,7 +96,12 @@ enum CodesignRFCompare {
                 count += 1
             }
         }
-        print("共发现同名且同hash文件files2: \(count) 个")
+        print("""
+              共发现同名 且 同hash文件files2: \(count) 个
+              \(Float(count) / Float(file2.files2.count))
+              \(Float(count) / Float(file1.files2.count))
+             \n
+             """)
     }
 
     private static func analysisFile(_ path: String) -> CodesignRCFile? {
