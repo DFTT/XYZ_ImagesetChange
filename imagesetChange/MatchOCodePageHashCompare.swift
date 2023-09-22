@@ -6,6 +6,45 @@
 //
 
 enum MatchOCodePageHashCompare {
+    /// 使用strings mach-o_file >> ~/Desktop/strings.txt 导出strings
+    /// 提供a.txt  b.txt -> 打印 重复率 = similer className count / a.txt class count
+    static func compareStrings(source: String, des: String) {
+        guard let sStrings = try? String(contentsOfFile: source),
+              let dStrings = try? String(contentsOfFile: des) else { return }
+
+        let sourceArr = sStrings.components(separatedBy: "\n")
+        let desArr = dStrings.components(separatedBy: "\n")
+
+        for i in 0 ..< 2 {
+            if i == 0 {
+                let sourceSet = Set(sourceArr)
+                let desSet = Set(desArr)
+
+                let intersSet = sourceSet.intersection(desSet)
+
+                print("strings字符串 比对结束 \n intersect count: \(intersSet.count)\n des count: \(desSet.count)\n source count: \(sourceSet.count) \n 重复率为: \(Float(intersSet.count) / Float(sourceSet.count) * 100) % \n")
+                continue
+            }
+
+            // 去除系统strnigs
+            let systemPre = ["UI", "NS", "AS", "CG", "Core", "NN", "Foun", "NA"]
+            let sourceSet = Set(sourceArr.filter { item in
+                return systemPre.first(where: { pre in
+                    item.hasPrefix(pre)
+                }) == nil
+            })
+            let desSet = Set(desArr.filter { item in
+                return systemPre.first(where: { pre in
+                    item.hasPrefix(pre)
+                }) == nil
+            })
+
+            let intersSet = sourceSet.intersection(desSet)
+
+            print("strings字符串 比对结束 \n intersect count: \(intersSet.count)\n des count: \(desSet.count)\n source count: \(sourceSet.count) \n 重复率为: \(Float(intersSet.count) / Float(sourceSet.count) * 100) %")
+        }
+    }
+
     /// arm64架构的.app (build接口)
     /// 使用WBBlades在这个方法中 处理allClasses之后 可以导出可读性较好的 classList
     ///  + (NSArray*)diffClasses:(NSMutableSet *)allClasses used:(NSMutableSet *)usedClasses classSize:(NSMutableDictionary *)sizeDic fileData:(NSData *)fileData {}
